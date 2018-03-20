@@ -69,6 +69,14 @@ def load_user(id):
 def secure():
     return render_template('secure_page.html')
     
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    
+    flash('Logged out', 'success')
+    return redirect(url_for("home"))
+
 @app.route('/<file_name>.txt')
 def send_text_file(file_name):
     """Send your static text file."""
